@@ -11,7 +11,7 @@ as many as you need.
 
 Usage:
 
-index.php contains two links for testing two seperate sites. The names of these
+index.php contains two links for testing two separate sites. The names of these
 sites are passed along to verify-up.php.
 
 Set the "TestURL1" and "TestURL2" variables to known files on remote servers that you wish to test.
