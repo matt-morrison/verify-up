@@ -9,7 +9,7 @@
   however, is not found, you are able to serve a mirror to the site. This
   example uses two instances of sites to be tested, but you can expand them to
   as many as you need.
-  
+
 **/
 
 <?php
@@ -26,37 +26,37 @@ if (isset($_GET['TestURL1'])) {
 // if it exists on the remote server.
 function verify($testsite) {
 
-  $ch = curl_init($testsite);
+  $ts = curl_init($testsite);
 
-  curl_setopt($ch, CURLOPT_NOBODY, true);
-  curl_exec($ch);
-  $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  curl_setopt($ts, CURLOPT_NOBODY, true);
+  curl_exec($ts);
+  $ret = curl_getinfo($ts, CURLINFO_HTTP_CODE);
 
-  // $retcode >= 400 -> not found, $retcode = 200, found.
+  // $ret >= 400 -> not found, $ret = 200, found.
   // Replace the TestURL with the address you set above. If the site exists, you
   // can link to the TestURL
-  if ($retcode == 200 && $testsite == "TestURL1") {
+  if ($ret == 200 && $testsite == "TestURL1") {
     echo '<script type="text/javascript">
            window.location = "TestURL1"
           </script>';
   }
-  else if ($retcode == 200 && $testsite == "TestURL2") {
+  else if ($ret == 200 && $testsite == "TestURL2") {
     echo '<script type="text/javascript">
            window.location = "TestURL2"
           </script>';
   }
-  // If $retcode !=200, the file on the site is not found. If this is the case,
+  // If $ret !=200, the file on the site is not found. If this is the case,
   // you can link to a mirror of the site so that your link never goes down.
-  else if ($retcode != 200 && $testsite == "TestURL1") {
+  else if ($ret != 200 && $testsite == "TestURL1") {
     echo '<script type="text/javascript">
            window.location = "TestURL1-Mirror"
           </script>';
   }
-  else if ($retcode != 200 && $testsite == "TestURL2") {
+  else if ($ret != 200 && $testsite == "TestURL2") {
     echo '<script type="text/javascript">
            window.location = "TestURL2-Mirror"
           </script>';
   }
-  curl_close($ch);
+  curl_close($ts);
 }
 ?>
